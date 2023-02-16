@@ -1,13 +1,13 @@
-import { useState } from 'react'
 import ButtonAppBar from './components/App-Bar'
+import TableComponent from './components/Table-Component'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <div className="App">
       <ButtonAppBar />
+      <TableComponent/>
     </div>
   )
 }
