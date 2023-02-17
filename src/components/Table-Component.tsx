@@ -53,19 +53,19 @@ function createData(
 }
 
 const rows = [
-  createData('Cupcake', '305', '3.7', 67, '4.3', 13.2, 15311, 'United Kingdom'),
-  createData('Donut', '452', '25.0', 51, '4.9', 13.2, 15311, 'United Kingdom'),
-  createData('Eclair', '262', '16.0', 24, '6.0', 13.2, 15311, 'United Kingdom'),
-  createData('Frozen yoghurt', '159', '6.0', 24, '4.0', 13.2, 15311, 'United Kingdom'),
-  createData('Gingerbread', '356', '16.0', 49, '3.9', 13.2, 15311, 'United Kingdom'),
-  createData('Honeycomb', '408', '3.2', 87, '6.5', 13.2, 15311, 'United Kingdom'),
-  createData('Ice cream sandwich', '237', '9.0', 37, '4.3', 13.2, 15311, 'United Kingdom'),
-  createData('Jelly Bean', '375', '0.0', 94, '0.0', 13.2, 15311, 'United Kingdom'),
-  createData('KitKat', '518', '26.0', 65, '7.0', 13.2, 15311, 'United Kingdom'),
-  createData('Lollipop', '392', '0.2', 98, '0.0', 13.2, 15311, 'United Kingdom'),
-  createData('Marshmallow', '318', '0', 81, '2.0', 13.2, 15311, 'United Kingdom'),
-  createData('Nougat', '360', '19.0', 9, '37.0', 13.2, 15311, 'United Kingdom'),
-  createData('Oreo', '437', '18.0', 63, '4.0', 13.2, 15311, 'United Kingdom'),
+  createData('536365', '85123A', 'WHITE HANGING HEART T-LIGHT HOLDER', 67, '12/1/2010  8:26', 13.2, 15311, 'United Kingdom'),
+  createData('536365', '71053', 'WHITE METAL LANTERN', 51, '12/1/2010  8:26', 13.2, 15311, 'United Kingdom'),
+  createData('536365', '84406B', 'CREAM CUPID HEARTS COAT HANGER', 24, '12/1/2010  8:26', 13.2, 15311, 'United Kingdom'),
+  createData('536365', '84029G', 'KNITTED UNION FLAG HOT WATER BOTTLE', 24, '12/1/2010  8:26', 13.2, 15311, 'United Kingdom'),
+  createData('536365', '84029E', 'RED WOOLLY HOTTIE WHITE HEART.', 49, '12/1/2010  8:26', 13.2, 15311, 'United Kingdom'),
+  createData('536365', '22752', 'SET 7 BABUSHKA NESTING BOXES', 87, '12/1/2010  8:26', 13.2, 15311, 'United Kingdom'),
+  createData('536365', '21730', 'GLASS STAR FROSTED T-LIGHT HOLDER', 37, '12/1/2010  8:26', 13.2, 15311, 'United Kingdom'),
+  createData('536365', '22633', 'HAND WARMER UNION JACK', 94, '12/1/2010  8:26', 13.2, 15311, 'United Kingdom'),
+  createData('536365', '22632', 'HAND WARMER RED POLKA DOT', 65, '12/1/2010  8:26', 13.2, 15311, 'United Kingdom'),
+  createData('536365', '84879', 'ASSORTED COLOUR BIRD ORNAMENT', 98, '12/1/2010  8:26', 13.2, 15311, 'United Kingdom'),
+  createData('536365', '22745', "POPPY'S PLAYHOUSE BEDROOM ", 81, '12/1/2010  8:26', 13.2, 15311, 'United Kingdom'),
+  createData('536365', '22748', "POPPY'S PLAYHOUSE KITCHEN ", 9, '12/1/2010  8:26', 13.2, 15311, 'United Kingdom'),
+  createData('536365', '22749', 'FELTCRAFT PRINCESS CHARLOTTE DOLL', 63, '12/1/2010  8:26', 13.2, 15311, 'United Kingdom'),
 ];
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -124,13 +124,13 @@ const headCells: readonly HeadCell[] = [
   },
   {
     id: 'StockCode',
-    numeric: true,
+    numeric: false,
     disablePadding: false,
     label: 'StockCode',
   },
   {
     id: 'Description',
-    numeric: true,
+    numeric: false,
     disablePadding: false,
     label: 'Description',
   },
@@ -142,7 +142,7 @@ const headCells: readonly HeadCell[] = [
   },
   {
     id: 'InvoiceDate',
-    numeric: true,
+    numeric: false,
     disablePadding: false,
     label: 'InvoiceDate',
   },
@@ -160,7 +160,7 @@ const headCells: readonly HeadCell[] = [
   },
   {
     id: 'Country',
-    numeric: true,
+    numeric: false,
     disablePadding: false,
     label: 'Country',
   }
@@ -380,7 +380,7 @@ export default function TableComponent() {
                       <TableCell align="right">{row.Description}</TableCell>
                       <TableCell align="right">{row.Quantity}</TableCell>
                       <TableCell align="right">{row.InvoiceDate}</TableCell>
-                      <TableCell align="right">{row.UnitPrice}</TableCell>
+                      <TableCell align="right">&#36;{row.UnitPrice}</TableCell>
                       <TableCell align="right">{row.CustomerId}</TableCell>
                       <TableCell align="right">{row.Country}</TableCell>
                     </TableRow>
