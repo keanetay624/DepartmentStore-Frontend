@@ -17,18 +17,8 @@ import Tooltip from '@mui/material/Tooltip';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
-import './App-Bar.css'
+import SalesItemData from '../assets/DataInterface'
 
-interface Data {
-  InvoiceNo: string;
-  StockCode: string;
-  Description: string;
-  Quantity: number;
-  InvoiceDate: string;
-  UnitPrice: number;
-  CustomerId: number;
-  Country: string;
-}
 
 function createData(
   InvoiceNo: string,
@@ -39,7 +29,7 @@ function createData(
     UnitPrice: number,
     CustomerId: number,
     Country: string
-): Data {
+): SalesItemData {
   return {
     InvoiceNo,
     StockCode,
@@ -110,7 +100,7 @@ function stableSort<T>(array: readonly T[], comparator: (a: T, b: T) => number) 
 
 interface HeadCell {
   disablePadding: boolean;
-  id: keyof Data;
+  id: keyof SalesItemData;
   label: string;
   numeric: boolean;
 }
@@ -168,7 +158,7 @@ const headCells: readonly HeadCell[] = [
 
 interface EnhancedTableProps {
   numSelected: number;
-  onRequestSort: (event: React.MouseEvent<unknown>, property: keyof Data) => void;
+  onRequestSort: (event: React.MouseEvent<unknown>, property: keyof SalesItemData) => void;
   onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
   order: Order;
   orderBy: string;
@@ -179,7 +169,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
   const { order, orderBy, onRequestSort } =
     props;
   const createSortHandler =
-    (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
+    (property: keyof SalesItemData) => (event: React.MouseEvent<unknown>) => {
       onRequestSort(event, property);
     };
 
@@ -270,7 +260,7 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
 
 export default function TableComponent() {
   const [order, setOrder] = React.useState<Order>('asc');
-  const [orderBy, setOrderBy] = React.useState<keyof Data>('calories');
+  const [orderBy, setOrderBy] = React.useState<keyof SalesItemData>('InvoiceNo');
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
@@ -278,7 +268,7 @@ export default function TableComponent() {
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
-    property: keyof Data,
+    property: keyof SalesItemData,
   ) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -287,7 +277,7 @@ export default function TableComponent() {
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelected = rows.map((n) => n.name);
+      const newSelected = rows.map((n) => n.InvoiceNo);
       setSelected(newSelected);
       return;
     }
@@ -352,17 +342,17 @@ export default function TableComponent() {
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.name);
+                  const isItemSelected = isSelected(row.InvoiceNo);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.name)}
+                      onClick={(event) => handleClick(event, row.InvoiceNo)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.name}
+                      key={row.InvoiceNo}
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
