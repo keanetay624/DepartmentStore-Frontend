@@ -18,45 +18,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import SalesItemData from '../assets/DataInterface'
+import SalesItemSampleData from '../assets/SalesItemSampleData'
 
-
-function createData(
-  InvoiceNo: string,
-    StockCode: string,
-    Description: string,
-    Quantity: number,
-    InvoiceDate: string,
-    UnitPrice: number,
-    CustomerId: number,
-    Country: string
-): SalesItemData {
-  return {
-    InvoiceNo,
-    StockCode,
-    Description,
-    Quantity,
-    InvoiceDate,
-    UnitPrice,
-    CustomerId,
-    Country
-  };
-}
-
-const rows = [
-  createData('536365', '85123A', 'WHITE HANGING HEART T-LIGHT HOLDER', 67, '12/1/2010  8:26', 13.2, 15311, 'United Kingdom'),
-  createData('536365', '71053', 'WHITE METAL LANTERN', 51, '12/1/2010  8:26', 13.2, 15311, 'United Kingdom'),
-  createData('536365', '84406B', 'CREAM CUPID HEARTS COAT HANGER', 24, '12/1/2010  8:26', 13.2, 15311, 'United Kingdom'),
-  createData('536365', '84029G', 'KNITTED UNION FLAG HOT WATER BOTTLE', 24, '12/1/2010  8:26', 13.2, 15311, 'United Kingdom'),
-  createData('536365', '84029E', 'RED WOOLLY HOTTIE WHITE HEART.', 49, '12/1/2010  8:26', 13.2, 15311, 'United Kingdom'),
-  createData('536365', '22752', 'SET 7 BABUSHKA NESTING BOXES', 87, '12/1/2010  8:26', 13.2, 15311, 'United Kingdom'),
-  createData('536365', '21730', 'GLASS STAR FROSTED T-LIGHT HOLDER', 37, '12/1/2010  8:26', 13.2, 15311, 'United Kingdom'),
-  createData('536365', '22633', 'HAND WARMER UNION JACK', 94, '12/1/2010  8:26', 13.2, 15311, 'United Kingdom'),
-  createData('536365', '22632', 'HAND WARMER RED POLKA DOT', 65, '12/1/2010  8:26', 13.2, 15311, 'United Kingdom'),
-  createData('536365', '84879', 'ASSORTED COLOUR BIRD ORNAMENT', 98, '12/1/2010  8:26', 13.2, 15311, 'United Kingdom'),
-  createData('536365', '22745', "POPPY'S PLAYHOUSE BEDROOM ", 81, '12/1/2010  8:26', 13.2, 15311, 'United Kingdom'),
-  createData('536365', '22748', "POPPY'S PLAYHOUSE KITCHEN ", 9, '12/1/2010  8:26', 13.2, 15311, 'United Kingdom'),
-  createData('536365', '22749', 'FELTCRAFT PRINCESS CHARLOTTE DOLL', 63, '12/1/2010  8:26', 13.2, 15311, 'United Kingdom'),
-];
+const rows = SalesItemSampleData;
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
