@@ -20,43 +20,52 @@ import { visuallyHidden } from '@mui/utils';
 import './App-Bar.css'
 
 interface Data {
-  invoiceNo: string;
+  InvoiceNo: string;
   StockCode: string;
   Description: string;
   Quantity: number;
   InvoiceDate: string;
+  UnitPrice: number;
+  CustomerId: number;
+  Country: string;
 }
 
 function createData(
-    invoiceNo: string,
+  InvoiceNo: string,
     StockCode: string,
     Description: string,
     Quantity: number,
     InvoiceDate: string,
+    UnitPrice: number,
+    CustomerId: number,
+    Country: string
 ): Data {
   return {
-    invoiceNo,
+    InvoiceNo,
     StockCode,
     Description,
     Quantity,
     InvoiceDate,
+    UnitPrice,
+    CustomerId,
+    Country
   };
 }
 
 const rows = [
-  createData('Cupcake', '305', '3.7', 67, '4.3'),
-  createData('Donut', '452', '25.0', 51, '4.9'),
-  createData('Eclair', '262', '16.0', 24, '6.0'),
-  createData('Frozen yoghurt', '159', '6.0', 24, '4.0'),
-  createData('Gingerbread', '356', '16.0', 49, '3.9'),
-  createData('Honeycomb', '408', '3.2', 87, '6.5'),
-  createData('Ice cream sandwich', '237', '9.0', 37, '4.3'),
-  createData('Jelly Bean', '375', '0.0', 94, '0.0'),
-  createData('KitKat', '518', '26.0', 65, '7.0'),
-  createData('Lollipop', '392', '0.2', 98, '0.0'),
-  createData('Marshmallow', '318', '0', 81, '2.0'),
-  createData('Nougat', '360', '19.0', 9, '37.0'),
-  createData('Oreo', '437', '18.0', 63, '4.0'),
+  createData('Cupcake', '305', '3.7', 67, '4.3', 13.2, 15311, 'United Kingdom'),
+  createData('Donut', '452', '25.0', 51, '4.9', 13.2, 15311, 'United Kingdom'),
+  createData('Eclair', '262', '16.0', 24, '6.0', 13.2, 15311, 'United Kingdom'),
+  createData('Frozen yoghurt', '159', '6.0', 24, '4.0', 13.2, 15311, 'United Kingdom'),
+  createData('Gingerbread', '356', '16.0', 49, '3.9', 13.2, 15311, 'United Kingdom'),
+  createData('Honeycomb', '408', '3.2', 87, '6.5', 13.2, 15311, 'United Kingdom'),
+  createData('Ice cream sandwich', '237', '9.0', 37, '4.3', 13.2, 15311, 'United Kingdom'),
+  createData('Jelly Bean', '375', '0.0', 94, '0.0', 13.2, 15311, 'United Kingdom'),
+  createData('KitKat', '518', '26.0', 65, '7.0', 13.2, 15311, 'United Kingdom'),
+  createData('Lollipop', '392', '0.2', 98, '0.0', 13.2, 15311, 'United Kingdom'),
+  createData('Marshmallow', '318', '0', 81, '2.0', 13.2, 15311, 'United Kingdom'),
+  createData('Nougat', '360', '19.0', 9, '37.0', 13.2, 15311, 'United Kingdom'),
+  createData('Oreo', '437', '18.0', 63, '4.0', 13.2, 15311, 'United Kingdom'),
 ];
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -108,7 +117,7 @@ interface HeadCell {
 
 const headCells: readonly HeadCell[] = [
   {
-    id: 'invoiceNo',
+    id: 'InvoiceNo',
     numeric: false,
     disablePadding: true,
     label: 'InvoiceNo',
@@ -136,6 +145,24 @@ const headCells: readonly HeadCell[] = [
     numeric: true,
     disablePadding: false,
     label: 'InvoiceDate',
+  },
+  {
+    id: 'UnitPrice',
+    numeric: true,
+    disablePadding: false,
+    label: 'UnitPrice',
+  },
+  {
+    id: 'CustomerId',
+    numeric: true,
+    disablePadding: false,
+    label: 'CustomerId',
+  },
+  {
+    id: 'Country',
+    numeric: true,
+    disablePadding: false,
+    label: 'Country',
   }
 ];
 
@@ -347,12 +374,15 @@ export default function TableComponent() {
                         scope="row"
                         padding="none"
                       >
-                        {row.invoiceNo}
+                        {row.InvoiceNo}
                       </TableCell>
                       <TableCell align="right">{row.StockCode}</TableCell>
                       <TableCell align="right">{row.Description}</TableCell>
                       <TableCell align="right">{row.Quantity}</TableCell>
                       <TableCell align="right">{row.InvoiceDate}</TableCell>
+                      <TableCell align="right">{row.UnitPrice}</TableCell>
+                      <TableCell align="right">{row.CustomerId}</TableCell>
+                      <TableCell align="right">{row.Country}</TableCell>
                     </TableRow>
                   );
                 })}
