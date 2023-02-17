@@ -1,4 +1,5 @@
 export default interface SalesItemData {
+    id: number;
     InvoiceNo: string;
     StockCode: string;
     Description: string;
