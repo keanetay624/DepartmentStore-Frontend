@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react'
 import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
@@ -19,8 +20,9 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import SalesItemData from '../assets/DataInterface'
 import SalesItemSampleData from '../assets/SalesItemSampleData'
+import { getSalesItems } from '../hooks/ApiUtils'
 
-const rows = SalesItemSampleData;
+let rows = SalesItemSampleData;
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -224,11 +226,44 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
 
 export default function TableComponent() {
   const [order, setOrder] = React.useState<Order>('asc');
-  const [orderBy, setOrderBy] = React.useState<keyof SalesItemData>('InvoiceNo');
+  const [orderBy, setOrderBy] = React.useState<keyof SalesItemData>('id');
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [data, setData] = useState([])
+  const [totalSearchResults, setTotalSearchResults]  = useState(0)
+
+  useEffect(()=> {
+    const params = {
+      searchStr:'',
+      limit:100,
+      offset:0,
+    }
+    getSalesItems(params).then(
+            res => {
+              const salesItems = res.data
+              setData(salesItems)
+              let salesItemsArray:SalesItemData[] = []
+
+              salesItems.results.map((item:any) => {
+                const currentItem:SalesItemData = {id:item.id, 
+                  InvoiceNo:item.invoiceNo, 
+                  InvoiceDate:item.invoiceDate,
+                  StockCode:item.stockCode,
+                  Description:item.description,
+                  UnitPrice:item.unitPrice,
+                  CustomerId:item.customerId,
+                  Quantity:item.quantity,
+                  Country:item.country}
+                  salesItemsArray.push(currentItem)
+              })
+              console.log("salesItemArray:", salesItemsArray)
+              setTotalSearchResults(res.data.totalSearchCount)
+              rows = [...salesItemsArray]
+            })
+    
+  },[]) 
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
@@ -316,7 +351,7 @@ export default function TableComponent() {
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.InvoiceNo}
+                      key={row.id}
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
@@ -355,7 +390,7 @@ export default function TableComponent() {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={rows.length}
+          count={totalSearchResults}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
