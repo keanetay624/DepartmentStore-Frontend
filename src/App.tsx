@@ -1,13 +1,11 @@
-import ButtonAppBar from './components/App-Bar'
-import TableComponent from './components/Table-Component'
+import SalesItems from './pages/salesItems';
 import './App.css'
 
 function App() {
 
   return (
     <div className="App">
-      <ButtonAppBar />
-      <TableComponent/>
+      <SalesItems />
     </div>
   )
 }
