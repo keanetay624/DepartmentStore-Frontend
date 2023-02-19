@@ -5,7 +5,7 @@ export default function SalesItems() {
     return (
         <div>
             <ButtonAppBar />
-            <TableComponent/>
+            <TableComponent />
         </div>
     )
 }
