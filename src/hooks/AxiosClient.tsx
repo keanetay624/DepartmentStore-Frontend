@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export default function getAxiosClient(params:any) {
+export function getAxiosGetClient(params:any) {
   return axios.create({
     headers: {
       'Accept': 'application/json',
@@ -8,4 +8,8 @@ export default function getAxiosClient(params:any) {
     },
     params: params
   });
+}
+
+export function getAxiosUploadClient() {
+  return axios.create();
 }

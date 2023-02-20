@@ -1,15 +1,36 @@
 
 import TableComponent from '../components/Table-Component'
-import Fab from '@mui/material/Fab';
-import AttachFileIcon from '@mui/icons-material/AttachFile';
+import Button from '@mui/material/Button';
+import { uploadSalesItems } from '../hooks/ApiUtils'
+import { useState } from 'react'
 
 export default function SalesItems() {
-    return (
+    const [file, setFile] = useState<File>()
+
+    const handleFileChange = (e:any): void => {
+        const uploadedFile = e.target.files[0]
+        console.log("file:", uploadedFile)
+        setFile(uploadedFile)
+    }
+
+    const handleFileUpload = (): void => {
+        console.log('do upload here')
+        if (!file) {
+            return;
+        }
+        const response = uploadSalesItems(file);
+        console.log('api called! file - ', file)
+    }
+     return (
         <div>
             <TableComponent />
-            <Fab color="primary" aria-label="add">
-                <AttachFileIcon />
-            </Fab>
+            <Button variant="contained" component="label">
+                Choose File
+                <input hidden type="file" onChange={handleFileChange}/>
+            </Button>
+            <Button onClick={handleFileUpload}>
+                Upload
+            </Button>
         </div>
     )
 }
