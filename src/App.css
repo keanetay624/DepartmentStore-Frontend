@@ -1,3 +1,18 @@
-#root {
-  margin: 0;
+.app {
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  /* border: black solid 1px; */
+}
+
+.appbar {
+  /* border: red solid 1px; */
+}
+
+.salesItemTable {
+  /* border: purple solid 1px; */
+  margin: 1.5rem 0;
 }

@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import SalesItemData from '../assets/DataInterface'
 import SalesItemSampleData from '../assets/SalesItemSampleData'
 import { getSalesItems } from '../hooks/ApiUtils'
+import '../App.css'
 
 export default function TableComponent() {
   const [page, setPage] = React.useState(0);
@@ -96,28 +97,20 @@ export default function TableComponent() {
   ];
 
   return (
-    <div>
-      <Box sx={{ height: 600, width: '80vw' }}
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        minHeight="100vh"
-      >
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          disableSelectionOnClick
-          experimentalFeatures={{ newEditingApi: true }}
-          rowsPerPageOptions={[5, 10, 20]}
-          pageSize={pageSize}
-          pagination
-          paginationMode="server"
-          onPageChange={(newPage) => setPage(newPage)}
-          onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-          rowCount={totalSearchResults}
-        />
-      </Box>
-    </div>
-
+    <Box sx={{ height: '600px', width: 1200 }} className="salesItemTable">
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        disableSelectionOnClick
+        experimentalFeatures={{ newEditingApi: true }}
+        rowsPerPageOptions={[5, 10, 20]}
+        pageSize={pageSize}
+        pagination
+        paginationMode="server"
+        onPageChange={(newPage) => setPage(newPage)}
+        onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+        rowCount={totalSearchResults}
+      />
+    </Box>
   );
 }
