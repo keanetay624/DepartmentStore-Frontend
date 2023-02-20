@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react'
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import SalesItemData from '../assets/DataInterface'
 import SalesItemSampleData from '../assets/SalesItemSampleData'
@@ -12,10 +13,15 @@ export default function TableComponent() {
   const [pageSize, setPageSize] = React.useState(5);
   const [rows, setRows] = useState<SalesItemData[]>([])
   const [totalSearchResults, setTotalSearchResults] = useState(0)
+  const [searchStr, setSearchStr] = useState('');
+
+  const handleSearchChange = (event:any) => {
+    setSearchStr(event.target.value);
+  };
 
   useEffect(() => {
     const params = {
-      searchStr: '',
+      searchStr: searchStr,
       limit: pageSize,
       offset: page,
     }
@@ -39,9 +45,10 @@ export default function TableComponent() {
           salesItemsArray.push(currentItem)
         })
         setTotalSearchResults(res.data.totalSearchCount)
+        setRows([])
         setRows([...salesItemsArray])
       })
-  }, [page, pageSize])
+  }, [page, pageSize, searchStr])
 
   const columns: GridColDef[] = [
     { field: 'id', headerName: 'ID', width: 90 },
@@ -98,6 +105,7 @@ export default function TableComponent() {
 
   return (
     <Box sx={{ height: '600px', width: 1200 }} className="salesItemTable">
+      <TextField id="searchField" label="Search Items" variant="outlined" onChange={handleSearchChange}/>
       <DataGrid
         rows={rows}
         columns={columns}
