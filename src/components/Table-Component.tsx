@@ -21,7 +21,7 @@ export default function TableComponent() {
 
   useEffect(() => {
     const params = {
-      searchStr: searchStr,
+      searchStr: '',
       limit: pageSize,
       offset: page,
     }
@@ -48,7 +48,7 @@ export default function TableComponent() {
         setRows([])
         setRows([...salesItemsArray])
       })
-  }, [page, pageSize, searchStr])
+  }, [page, pageSize])
 
   const columns: GridColDef[] = [
     { field: 'id', headerName: 'ID', width: 90 },
@@ -104,7 +104,7 @@ export default function TableComponent() {
   ];
 
   return (
-    <Box sx={{ height: '600px', width: 1200 }} className="salesItemTable">
+    <Box className="salesItemTable">
       <TextField id="searchField" label="Search Items" variant="outlined" onChange={handleSearchChange}/>
       <DataGrid
         rows={rows}
@@ -118,6 +118,7 @@ export default function TableComponent() {
         onPageChange={(newPage) => setPage(newPage)}
         onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
         rowCount={totalSearchResults}
+        autoHeight
       />
     </Box>
   );
