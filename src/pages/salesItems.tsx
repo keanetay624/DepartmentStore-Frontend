@@ -7,7 +7,15 @@ import { useState } from 'react'
 
 export default function SalesItems() {
     const [file, setFile] = useState<File>()
-    const [inProgress, setInProgress] = useState(false)
+    const [inUploadProgress, setInUploadProgress] = useState(false)
+    const uploadMessage = () => {
+        return (
+        <div>
+            <CircularProgress />
+            <span >Uploading in progress...</span>
+        </div>
+        )
+    }
 
     const handleFileChange = (e:any): void => {
         const uploadedFile = e.target.files[0]
@@ -17,20 +25,11 @@ export default function SalesItems() {
 
     const handleFileUpload = (): void => {
         console.log('do upload here')
-        if (!file) {
-            return;
-        }
-        setInProgress(true)
-        console.log('in progress...')
+        if (!file) { return; }
+        setInUploadProgress(true)
         const response = uploadSalesItems(file).then(
-            result => {
-                console.log(result)
-                setInProgress(false)
-                console.log('upload complete...')
-            }
-                
+                result => setInUploadProgress(false)
         );
-        console.log('api called! file - ', file)
     }
      return (
         <div style={{width:"100%"}}>
@@ -42,7 +41,7 @@ export default function SalesItems() {
             <Button onClick={handleFileUpload}>
                 Upload
             </Button>
-            {inProgress && <CircularProgress />}  
+            {inUploadProgress && uploadMessage()}  
         </div>
     )
 }
