@@ -1,4 +1,4 @@
-import SalesItems from './pages/salesItems';
+import SalesItems from './pages/SalesItems';
 import ButtonAppBar from './shared/App-Bar'
 import './App.css'
 
