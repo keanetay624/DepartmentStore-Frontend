@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react'
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { DataGrid } from '@mui/x-data-grid';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import SalesItemData from '../../../assets/DataInterface'
 import { getSalesItems } from '../../../util/ApiUtil'
 import '../../../App.css'
+import columns from './SalesItemTableColumns'
 
 export default function TableComponent() {
   const [page, setPage] = React.useState(0);
@@ -48,59 +49,6 @@ export default function TableComponent() {
         setRows([...salesItemsArray])
       })
   }, [page, pageSize])
-
-  const columns: GridColDef[] = [
-    { field: 'id', headerName: 'ID', width: 90 },
-    {
-      field: 'InvoiceNo',
-      headerName: 'InvoiceNo',
-      width: 150,
-      editable: false,
-    },
-    {
-      field: 'StockCode',
-      headerName: 'StockCode',
-      width: 150,
-      editable: false,
-    },
-    {
-      field: 'Description',
-      headerName: 'Description',
-      width: 400,
-      editable: false,
-    },
-    {
-      field: 'Quantity',
-      headerName: 'Quantity',
-      description: 'This column has a value getter and is not sortable.',
-      sortable: false,
-      width: 150,
-    },
-    {
-      field: 'InvoiceDate',
-      headerName: 'InvoiceDate',
-      width: 150,
-      editable: false,
-    },
-    {
-      field: 'UnitPrice',
-      headerName: 'UnitPrice',
-      width: 150,
-      editable: false,
-    },
-    {
-      field: 'CustomerId',
-      headerName: 'CustomerId',
-      width: 150,
-      editable: false,
-    },
-    {
-      field: 'Country',
-      headerName: 'Country',
-      width: 150,
-      editable: false,
-    },
-  ];
 
   return (
     <Box className="salesItemTable">
