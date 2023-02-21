@@ -5,7 +5,7 @@ export default function UploadMessage(message:string) {
   return (
     <>
         <CircularProgress />
-        <span >{message}</span>
+        <span>{message}</span>
     </>
   )
 }

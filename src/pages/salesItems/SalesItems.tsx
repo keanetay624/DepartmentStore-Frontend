@@ -1,9 +1,9 @@
 
-import TableComponent from '../components/SalesItemTable'
+import TableComponent from './components/SalesItemTable'
 import Button from '@mui/material/Button';
-import { uploadSalesItems } from '../util/ApiUtil'
+import { uploadSalesItems } from '../../util/ApiUtil'
 import { useState } from 'react'
-import UploadMessage from '../shared/UploadMessage';
+import UploadMessage from '../../components/UploadMessage';
 
 export default function SalesItems() {
     const [file, setFile] = useState<File>()
@@ -11,12 +11,10 @@ export default function SalesItems() {
 
     const handleFileChange = (e:any): void => {
         const uploadedFile = e.target.files[0]
-        console.log("file:", uploadedFile)
         setFile(uploadedFile)
     }
 
     const handleFileUpload = (): void => {
-        console.log('do upload here')
         if (!file) { return; }
         setInUploadProgress(true)
         const response = uploadSalesItems(file).then(
@@ -30,9 +28,7 @@ export default function SalesItems() {
                 Choose File
                 <input hidden type="file" onChange={handleFileChange}/>
             </Button>
-            <Button onClick={handleFileUpload}>
-                Upload
-            </Button>
+            <Button onClick={handleFileUpload}>Upload</Button>
             {inUploadProgress && UploadMessage("Upload in progress...")}  
         </div>
     )

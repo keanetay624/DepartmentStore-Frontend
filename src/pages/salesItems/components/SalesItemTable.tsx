@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react'
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-import SalesItemData from '../assets/DataInterface'
-import SalesItemSampleData from '../assets/SalesItemSampleData'
-import { getSalesItems } from '../util/ApiUtil'
-import '../App.css'
+import SalesItemData from '../../../assets/DataInterface'
+import { getSalesItems } from '../../../util/ApiUtil'
+import '../../../App.css'
 
 export default function TableComponent() {
   const [page, setPage] = React.useState(0);
