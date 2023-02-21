@@ -1,21 +1,13 @@
 
-import TableComponent from '../components/Table-Component'
+import TableComponent from '../components/SalesItemTable'
 import Button from '@mui/material/Button';
-import CircularProgress from '@mui/material/CircularProgress';
-import { uploadSalesItems } from '../hooks/ApiUtils'
+import { uploadSalesItems } from '../util/ApiUtil'
 import { useState } from 'react'
+import UploadMessage from '../shared/UploadMessage';
 
 export default function SalesItems() {
     const [file, setFile] = useState<File>()
     const [inUploadProgress, setInUploadProgress] = useState(false)
-    const uploadMessage = () => {
-        return (
-        <div>
-            <CircularProgress />
-            <span >Uploading in progress...</span>
-        </div>
-        )
-    }
 
     const handleFileChange = (e:any): void => {
         const uploadedFile = e.target.files[0]
@@ -41,7 +33,7 @@ export default function SalesItems() {
             <Button onClick={handleFileUpload}>
                 Upload
             </Button>
-            {inUploadProgress && uploadMessage()}  
+            {inUploadProgress && UploadMessage("Upload in progress...")}  
         </div>
     )
 }

@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import SalesItemData from '../assets/DataInterface'
 import SalesItemSampleData from '../assets/SalesItemSampleData'
-import { getSalesItems } from '../hooks/ApiUtils'
+import { getSalesItems } from '../util/ApiUtil'
 import '../App.css'
 
 export default function TableComponent() {

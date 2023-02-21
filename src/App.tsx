@@ -1,5 +1,5 @@
 import SalesItems from './pages/SalesItems';
-import ButtonAppBar from './shared/App-Bar'
+import ButtonAppBar from './shared/AppBar'
 import './App.css'
 
 function App() {
