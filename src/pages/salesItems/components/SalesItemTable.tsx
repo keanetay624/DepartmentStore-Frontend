@@ -5,8 +5,9 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import SalesItemData from '../../../assets/DataInterface'
 import { getSalesItems } from '../../../util/ApiUtil'
-import '../../../App.css'
 import columns from './SalesItemTableColumns'
+import '../../../App.css'
+import getSalesItemsArray from './getSalesItemsArray';
 
 export default function TableComponent() {
   const [page, setPage] = React.useState(0);
@@ -20,35 +21,18 @@ export default function TableComponent() {
   };
 
   useEffect(() => {
-    const params = {
+    const requestParams = {
       searchStr: '',
       limit: pageSize,
       offset: page,
     }
-    getSalesItems(params).then(
+    getSalesItems(requestParams).then(
       res => {
-        const salesItems = res.data
-        let salesItemsArray: SalesItemData[] = []
-
-        salesItems.results.map((item: any) => {
-          const currentItem: SalesItemData = {
-            id: item.id,
-            InvoiceNo: item.invoiceNo,
-            InvoiceDate: item.invoiceDate,
-            StockCode: item.stockCode,
-            Description: item.description,
-            UnitPrice: item.unitPrice,
-            CustomerId: item.customerId,
-            Quantity: item.quantity,
-            Country: item.country
-          }
-          salesItemsArray.push(currentItem)
-        })
+        let salesItemsArray: SalesItemData[] = getSalesItemsArray(res.data)
         setTotalSearchResults(res.data.totalSearchCount)
-        setRows([])
-        setRows([...salesItemsArray])
-      })
-  }, [page, pageSize])
+        setRows(salesItemsArray)
+      }) 
+  }, [page, pageSize]) 
 
   return (
     <Box className="salesItemTable">
