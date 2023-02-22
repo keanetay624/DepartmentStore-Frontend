@@ -40,23 +40,28 @@ export default function SalesItems() {
         <div style={{width:"100%"}}>
             <Grid container spacing={2} sx={{
                 alignItems: 'center',
-                marginTop: '1rem'
-            }}>
+                marginTop: '1rem',
+                }}>
                 <MuiGridSpacer spacerSize={1}/>
-                <Grid item xs={4}><TextField sx={{width:'100%'}} id="searchField" label="Search Items" variant="outlined" onChange={handleSearchChange}/></Grid>
+                <Grid item xs={4} sx={{
+                    display:'flex',
+                    gap:2
+                    }}>
+                    <TextField sx={{width:'100%'}} id="searchField" label="Search Items" variant="outlined" onChange={handleSearchChange}/>
+                    <Button variant="contained" onClick={handleSearch}>Search</Button>
+                </Grid>
                 <MuiGridSpacer spacerSize={3}/>
-                <Grid item xs={1}><Button variant="contained" onClick={handleSearch}>Search</Button></Grid>
-                <Grid item xs={1}>
+                <Grid item xs={4} sx={{
+                    display: 'flex',
+                    gap:2
+                }}>
                     <Button variant="contained" component="label">
-                        File
+                        Choose File
                         <input hidden type="file" onChange={handleFileChange}/>
                     </Button>
+                    <Button variant="outlined" onClick={handleFileUpload}>Upload</Button>
+                    {inUploadProgress && UploadMessage("Upload in progress...")}
                 </Grid>
-                <Grid item xs={1}><Button onClick={handleFileUpload}>Upload</Button></Grid>
-                <MuiGridSpacer spacerSize={1}/>
-                <MuiGridSpacer spacerSize={5}/>
-                <Grid item xs={2}>{inUploadProgress && UploadMessage("Upload in progress...")}</Grid>
-                <MuiGridSpacer spacerSize={5}/>
             </Grid>
             <TableComponent searchStr={searchStr}/>
         </div>
