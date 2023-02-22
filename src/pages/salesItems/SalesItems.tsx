@@ -7,6 +7,7 @@ import { useState } from 'react'
 import UploadMessage from '../../components/UploadMessage';
 import '../../App.css'
 import { Grid } from '@mui/material';
+import MuiGridSpacer from '../../components/MuiGridSpacer';
 
 export default function SalesItems() {
     const [file, setFile] = useState<File>()
@@ -41,9 +42,9 @@ export default function SalesItems() {
                 alignItems: 'center',
                 marginTop: '1rem'
             }}>
-                <Grid item xs={1}></Grid>
+                <MuiGridSpacer spacerSize={1}/>
                 <Grid item xs={4}><TextField sx={{width:'100%'}} id="searchField" label="Search Items" variant="outlined" onChange={handleSearchChange}/></Grid>
-                <Grid item xs={3}></Grid>
+                <MuiGridSpacer spacerSize={3}/>
                 <Grid item xs={1}><Button variant="contained" onClick={handleSearch}>Search</Button></Grid>
                 <Grid item xs={1}>
                     <Button variant="contained" component="label">
@@ -52,10 +53,10 @@ export default function SalesItems() {
                     </Button>
                 </Grid>
                 <Grid item xs={1}><Button onClick={handleFileUpload}>Upload</Button></Grid>
-                <Grid item xs={1}></Grid>
-                <Grid item xs={5}></Grid>
+                <MuiGridSpacer spacerSize={1}/>
+                <MuiGridSpacer spacerSize={5}/>
                 <Grid item xs={2}>{inUploadProgress && UploadMessage("Upload in progress...")}</Grid>
-                <Grid item xs={5}></Grid>
+                <MuiGridSpacer spacerSize={5}/>
             </Grid>
             <TableComponent searchStr={searchStr}/>
         </div>
